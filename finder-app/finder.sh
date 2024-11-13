@@ -1,20 +1,21 @@
 #!/bin/bash
 
 if [ "$#" -ne 2 ]; then
-    echo "Error: Two arguments are required."
-    exit 1
+	echo "You have to specify 2 parameters"
+	exit 1
 fi
 
-filesdir="$1"
-searchstr="$2"
+filesDir=$1
+searchStr=$2
 
-if [ ! -d "$filesdir" ]; then
-    echo "Error: $filesdir is not a directory or does not exist."
-    exit 1
+
+if [ ! -d "$filesDir" ]; then
+	echo "The directory doesn't exist"
+	exit 1
 fi
 
-num_files=$(find "$filesdir" -type f | wc -l)
-num_matches=$(grep -r "$searchstr" "$filesdir" | wc -l)
+files_count=$(find "$filesDir" -type f | wc -l)
 
+found_lines_count=$(grep -r "$searchStr" "$filesDir" | wc -l)
 
-echo "The number of files are $num_files and the number of matching lines are $num_matches"
+echo "The number of files are $files_count and the number of matching lines are $found_lines_count"
