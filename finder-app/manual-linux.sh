@@ -78,7 +78,8 @@ make CONFIG_PREFIX="${OUTDIR}/rootfs" ARCH=${ARCH} CROSS_COMPILE=${CROSS_COMPILE
 
 # Add library dependencies from local repo copy
 echo "Adding library dependencies to RootFS from repo libs"
-cp /path/to/your/repo/libs/* "${OUTDIR}/rootfs/lib/"
+mkdir -p "${OUTDIR}/rootfs/lib"
+cp "${FINDER_APP_DIR}/libs/"* "${OUTDIR}/rootfs/lib/"
 
 # Create device nodes
 echo "Making device nodes"
@@ -104,4 +105,6 @@ echo "Creating initramfs.cpio.gz"
 cd "${OUTDIR}/rootfs"
 find . | cpio -H newc -ov --owner root:root > "${OUTDIR}/initramfs.cpio"
 gzip -f "${OUTDIR}/initramfs.cpio"
+
+echo "Script completed successfully."
 
